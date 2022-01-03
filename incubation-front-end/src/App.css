@@ -1,0 +1,9 @@
+body{
+    background-image: url(2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    opacity: 0.9;
+    background-position: center;
+    
+    }
