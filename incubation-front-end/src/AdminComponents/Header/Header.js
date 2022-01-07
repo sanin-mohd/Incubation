@@ -1,17 +1,18 @@
-import React, { useContext,us } from 'react';
+import React, { useContext } from 'react';
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
-
+import AuthContext from '../../Context/AuthContext'
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 function Header() {
     const navigate = useNavigate()
-
+    let {user} = useContext(AuthContext)
     return (
         <div className="headerParentDiv">
             <nav className="navbar navbar-expand-lg navbar-dark bg-info">
                 <div className="container container-fluid col-10">
 
 
-                    <strong i className="navbar-brand jus">INCUBATION</strong>
+                    <strong i onClick={() => navigate('/')} className="navbar-brand jus">INCUBATION</strong>
 
 
 
@@ -28,8 +29,25 @@ function Header() {
                     </div>
 
 
-
-                    <div className="d-flex">
+                   {user && 
+                    <div className="d-flex align-items-center" >
+                        <div className="">
+                        
+                        <h5 className="" style={{margin:"0px"}}>Welcome {user.username}..!!</h5>
+                        
+                        
+                        </div>
+                        
+                        <div className="">
+                            <b className="btn btn-danger"onClick={() => {
+                                navigate('/logout')}}>Logout</b>
+                        </div>
+                    </div>
+                    
+                   }
+                    
+                    {!user && 
+                        <div className="d-flex">
                         <div className="mr-3">
                             <b className="mr-3" onClick={() => {
                                 navigate('/login')}}>Login&nbsp;|</b>
@@ -38,7 +56,9 @@ function Header() {
                             <b className=""onClick={() => {
                                 navigate('/register')}}>&nbsp;Register</b>
                         </div>
-                    </div>
+                        </div>
+
+                    }
                 </div>
 
             </nav>

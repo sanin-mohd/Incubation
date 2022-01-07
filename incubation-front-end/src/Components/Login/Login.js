@@ -5,9 +5,11 @@ import axios from 'axios'
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-// import { TokenContext } from '../../store/context';
+import AuthContext from '../../Context/AuthContext'
 
 export default function Login() {
+    let {loginUser} = useContext(AuthContext)
+    
 const [username,setUsername] = useState('');
 const [password,setPassword] = useState('');
 const [alerts,setAlert] = useState('');
@@ -29,18 +31,7 @@ const handleLogin = (event)=>{
             username : username,
             password : password,
         }
-        try{
-            axios.post("http://127.0.0.1:8000/api/token/",data).then((res)=>{
-            console.log(res.data)
-            localStorage.setItem('access',res.data['access']);
-            localStorage.setItem('refresh',res.data['refresh']);
-            navigate('/');
-            })
-        }
-        catch (err) {
-            console.log(err);
-        }
-        
+        loginUser(username,password)
         }
     }
     return (
